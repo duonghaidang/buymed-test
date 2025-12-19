@@ -1,50 +1,22 @@
-# Welcome to your Expo app 👋
-
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## How to run
 
 ```bash
-npm run reset-project
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Open the app on iOS simulator, Android emulator, or Expo Go.
 
-## Learn more
+## Tech stack
 
-To learn more about developing your project with Expo, look at the following resources:
+- **Framework**: Expo + React Native
+- **State management**: Redux Toolkit (slice for UI state) + RTK Query (mocked baseQuery for products, search & category filter)
+- **Other**: `@expo/vector-icons`, `toastify-react-native`
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Task 1 – Quick Order: Trade-offs
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- **Mock data vs real backend**: Product list + search/filter are backed by an in-memory mock. With more time, I’d replace this with a real API (or MSW-based mock that mirrors it more closely).
+- **Component & structure**: Logic is mostly in a single screen + a `ProductItem` component. I’d further split into smaller UI/logic components and dedicated hooks/selectors for better reuse and testability.
+- **UI & UX polish**: Styles use mostly raw RN defaults and minimal layout. I’d invest in a clearer visual hierarchy, better spacing/typography, and refine interactions (empty states, loading indicators, keyboard behavior).
+- **Offline, caching & persistence**: Currently assumes a simple online mock API with in-memory cache only. With more time, I’d add network online/offline handling, disk caching for product data, and Redux state persistence (e.g., cart/quick order) across app restarts.
+- **Testing**: Currently no automated tests. I’d add unit tests for the Redux slice/RTK Query logic and basic component tests for key flows (search, filter, add/update/remove items).
